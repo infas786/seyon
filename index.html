@@ -105,16 +105,18 @@
   .mobile-panel.open a:nth-child(3){transition-delay:.26s;}
 
   /* ---------- HERO ---------- */
-  .hero{position:relative; height:100svh; min-height:620px; overflow:hidden; display:flex; align-items:flex-end;}
-  .hero-slides{position:absolute; inset:-4% -2%; will-change:transform;}
-  .hero-slide{position:absolute; inset:0; opacity:0; transform:scale(1.1); transition:opacity 1.5s var(--ease), transform 8s linear;}
+  .hero{position:relative; height:100svh; min-height:560px; overflow:hidden; display:flex; align-items:flex-end;}
+  .hero-slides{position:absolute; inset:0; will-change:transform;}
+  .hero-slide{position:absolute; inset:0; opacity:0; transform:scale(1.06); transition:opacity 1.5s var(--ease), transform 8s linear;}
   .hero-slide.active{opacity:1; transform:scale(1);}
-  .hero-slide img{width:100%; height:100%; object-fit:cover;}
+  .hero-slide picture,
+  .hero-slide img{width:100%; height:100%; display:block;}
+  .hero-slide img{object-fit:cover; object-position:center center;}
   .hero::before{
     content:""; position:absolute; inset:0; z-index:2;
-    background:linear-gradient(180deg, rgba(30,18,22,0.18) 0%, rgba(30,18,22,0.02) 30%, rgba(30,18,22,0.78) 100%);
+    background:linear-gradient(180deg, rgba(30,18,22,0.20) 0%, rgba(30,18,22,0.02) 35%, rgba(30,18,22,0.80) 100%);
   }
-  .hero-content{position:relative; z-index:3; width:100%; padding-bottom:clamp(56px,9vh,100px);}
+  .hero-content{position:relative; z-index:3; width:100%; padding-bottom:clamp(40px,8vh,100px);}
   .hero-content .wrap{display:flex; align-items:flex-end; justify-content:space-between; gap:40px; flex-wrap:wrap;}
   .hero-eyebrow{
     color:#FBF1E9; font-size:0.85rem; letter-spacing:0.04em; margin-bottom:18px; opacity:0;
@@ -345,9 +347,34 @@
     .nav-links{display:none;}
     .burger{display:flex;}
   }
+
+  /* ---------- MOBILE HERO (RESPONSIVE) ---------- */
+  @media(max-width:768px){
+    .hero{height:100svh; min-height:480px;}
+    .hero-slide img{object-position:center 30%;} /* Show more of the top/face area on mobile */
+    .hero-content{padding-bottom:clamp(32px,7vh,60px);}
+    .hero-content .wrap{flex-direction:column; align-items:flex-start; gap:24px;}
+    .hero-cta-col{align-items:flex-start; width:100%;}
+    .hero-sub{font-size:0.95rem; max-width:100%;}
+    .hero-title{font-size:clamp(2rem,8vw,2.8rem);}
+    .hero-eyebrow{font-size:0.78rem;}
+    .scroll-cue{display:none;}
+    .hero-dots button{width:20px;}
+    .hero-dots button.active{width:34px;}
+  }
+
   @media(max-width:520px){
+    .hero-slide img{object-position:center 25%;}
+    .hero-title{font-size:clamp(1.8rem,7.5vw,2.4rem);}
+    .hero-shop-btn{padding:14px 26px; font-size:0.88rem;}
     .about-images{grid-template-columns:1fr 0.8fr;}
     .badge-rotate{width:92px; height:92px; top:-24px; right:-10px;}
+  }
+
+  /* Tall mobile screens (portrait phones) */
+  @media(max-width:480px) and (orientation:portrait){
+    .hero{height:100svh; min-height:500px;}
+    .hero-slide img{object-position:center 20%;}
   }
 </style>
 </head>
@@ -594,8 +621,7 @@
     });
   }
 
-  /* ---------------- HERO SLIDER ---------------- */
-  /* Three distinct slide images: cover 1.png, cover 2.png, cover 3.png */
+  /* ---------------- HERO SLIDER (responsive, full image on mobile) ---------------- */
   var heroImages = [
     'cover 1.png',
     'cover 2.png',
@@ -611,6 +637,7 @@
     var img = document.createElement('img');
     img.src = src;
     img.alt = 'Seyon look ' + (i+1);
+    img.loading = (i === 0 ? 'eager' : 'lazy');
     div.appendChild(img);
     heroSlidesEl.appendChild(div);
 
@@ -652,7 +679,7 @@
     if(!ticking){
       window.requestAnimationFrame(function(){
         var y = window.scrollY;
-        if(y < window.innerHeight){ heroSlidesEl.style.transform = 'translateY(' + (y * 0.18) + 'px)'; }
+        if(y < window.innerHeight){ heroSlidesEl.style.transform = 'translateY(' + (y * 0.15) + 'px)'; }
         ticking = false;
       });
       ticking = true;
