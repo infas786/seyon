@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SEYON — Women's Housecoats & Loungewear</title>
+<meta name="description" content="SEYON — housecoats, wrap robes and loungewear for women, made in small batches. Browse the collection and order directly on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF3EF;
+    --bg-alt:#F5E3DA;
+    --panel:#FFFFFF;
+    --ink:#2E1E22;
+    --ink-soft:#75606A;
+    --accent:#B85C73;
+    --accent-soft:#E7B7C2;
+    --accent-2:#8C6E4F;
+    --line:rgba(46,30,34,0.13);
+    --shadow:0 30px 70px -30px rgba(46,30,34,0.35);
+    --ease:cubic-bezier(.22,1,.36,1);
+    --ease-soft:cubic-bezier(.16,.84,.44,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    font-family:'Manrope', sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+
+  img{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; line-height:1.06; letter-spacing:-0.01em;}
+  em, i{font-style:italic;}
+
+  .wrap{max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,60px);}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px;
+  }
+
+  /* ---------- floating decorative blobs ---------- */
+  .blob{position:absolute; border-radius:50%; filter:blur(50px); pointer-events:none; z-index:0;}
+  @keyframes drift1{ 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(30px,-24px) scale(1.06);} }
+  @keyframes drift2{ 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-26px,22px) scale(0.95);} }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:500;
+    padding:26px 0;
+    transition:padding .45s var(--ease), background .45s var(--ease), box-shadow .45s var(--ease);
+  }
+  header.site-nav .wrap{display:flex; align-items:center; justify-content:space-between;}
+  header.site-nav.scrolled{
+    padding:14px 0;
+    background:rgba(251,243,239,0.86);
+    backdrop-filter:blur(16px) saturate(1.2);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .brand{font-family:'Fraunces', serif; font-size:1.4rem; letter-spacing:0.01em; color:var(--ink); display:flex; align-items:center; gap:9px;}
+  .brand em{color:var(--accent);}
+  .brand .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); display:inline-block;}
+  .brand img{height:36px; width:auto; display:block;}
+  .nav-links{display:flex; gap:36px; align-items:center;}
+  .nav-links a{font-size:0.93rem; color:var(--ink-soft); position:relative; padding:4px 0; transition:color .3s;}
+  .nav-links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--ink); transition:width .35s var(--ease);}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    border:1px solid var(--ink); padding:10px 22px; border-radius:100px; font-size:0.85rem;
+    transition:background .35s var(--ease), color .35s var(--ease), transform .35s var(--ease);
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--bg); transform:translateY(-2px);}
+  .burger{display:none; flex-direction:column; gap:5px; width:26px; z-index:600;}
+  .burger span{height:1.5px; background:var(--ink); width:100%; transition:transform .35s var(--ease), opacity .3s;}
+  .burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  .mobile-panel{
+    position:fixed; inset:0; background:var(--bg); z-index:450;
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:26px;
+    padding:0 clamp(28px,8vw,60px);
+    clip-path:circle(0% at calc(100% - 40px) 42px); transition:clip-path .6s var(--ease);
+  }
+  .mobile-panel.open{clip-path:circle(150% at calc(100% - 40px) 42px);}
+  .mobile-panel a{font-family:'Fraunces', serif; font-size:2rem; color:var(--ink); opacity:0; transform:translateX(-14px); transition:opacity .5s var(--ease), transform .5s var(--ease);}
+  .mobile-panel.open a{opacity:1; transform:translateX(0);}
+  .mobile-panel.open a:nth-child(1){transition-delay:.12s;}
+  .mobile-panel.open a:nth-child(2){transition-delay:.19s;}
+  .mobile-panel.open a:nth-child(3){transition-delay:.26s;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; height:100svh; min-height:620px; overflow:hidden; display:flex; align-items:flex-end;}
+  .hero-slides{position:absolute; inset:-4% -2%; will-change:transform;}
+  .hero-slide{position:absolute; inset:0; opacity:0; transform:scale(1.1); transition:opacity 1.5s var(--ease), transform 8s linear;}
+  .hero-slide.active{opacity:1; transform:scale(1);}
+  .hero-slide img{width:100%; height:100%; object-fit:cover;}
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:2;
+    background:linear-gradient(180deg, rgba(30,18,22,0.18) 0%, rgba(30,18,22,0.02) 30%, rgba(30,18,22,0.78) 100%);
+  }
+  .hero-content{position:relative; z-index:3; width:100%; padding-bottom:clamp(56px,9vh,100px);}
+  .hero-content .wrap{display:flex; align-items:flex-end; justify-content:space-between; gap:40px; flex-wrap:wrap;}
+  .hero-eyebrow{
+    color:#FBF1E9; font-size:0.85rem; letter-spacing:0.04em; margin-bottom:18px; opacity:0;
+    display:inline-flex; align-items:center; gap:9px;
+    transform:translateY(10px); transition:opacity .8s var(--ease) .1s, transform .8s var(--ease) .1s;
+  }
+  .hero.loaded .hero-eyebrow{opacity:0.92; transform:translateY(0);}
+  .hero-eyebrow .dash{width:26px; height:1px; background:#FBF1E9; display:inline-block;}
+  .hero-title{color:#FCF6F1; font-size:clamp(2.5rem, 6.4vw, 5rem); max-width:13ch;}
+  .hero-title .line{display:block; overflow:hidden;}
+  .hero-title .line span{display:block; transform:translateY(112%); transition:transform 1.05s var(--ease);}
+  .hero.loaded .hero-title .line span{transform:translateY(0);}
+  .hero-title .line:nth-child(1) span{transition-delay:.2s;}
+  .hero-title .line:nth-child(2) span{transition-delay:.36s; font-style:italic; font-weight:400;}
+  .hero-sub{color:#F1E1D8; max-width:36ch; font-size:1.02rem; margin-top:20px; opacity:0; transform:translateY(16px); transition:opacity 1s var(--ease) .6s, transform 1s var(--ease) .6s;}
+  .hero.loaded .hero-sub{opacity:1; transform:translateY(0);}
+  .hero-cta-col{display:flex; flex-direction:column; align-items:flex-end; gap:24px; opacity:0; transition:opacity 1s var(--ease) .75s;}
+  .hero.loaded .hero-cta-col{opacity:1;}
+  .hero-shop-btn{
+    background:#FCF6F1; color:var(--ink); padding:16px 32px; border-radius:100px; font-size:0.92rem; font-weight:600;
+    display:inline-flex; align-items:center; gap:10px; transition:transform .45s var(--ease), background .35s, color .35s, box-shadow .45s;
+    box-shadow:0 0 0 0 rgba(184,92,115,0);
+  }
+  .hero-shop-btn:hover{transform:translateY(-3px); background:var(--accent); color:#fff; box-shadow:0 14px 30px -10px rgba(184,92,115,0.6);}
+  .hero-shop-btn svg{transition:transform .4s var(--ease);}
+  .hero-shop-btn:hover svg{transform:translateX(4px);}
+  .hero-dots{display:flex; gap:9px;}
+  .hero-dots button{width:26px; height:3px; background:rgba(255,255,255,0.35); border-radius:3px; transition:background .3s, width .3s;}
+  .hero-dots button.active{background:#FCF6F1; width:42px;}
+
+  .scroll-cue{position:absolute; z-index:3; right:clamp(20px,5vw,60px); bottom:30px; writing-mode:vertical-rl; color:#F1E1D8; font-size:0.75rem; letter-spacing:0.08em; display:flex; align-items:center; gap:10px;}
+  .scroll-cue::after{content:""; width:1px; height:46px; background:rgba(241,225,216,0.5); display:block; animation:cue 2.2s ease-in-out infinite;}
+  @keyframes cue{0%{transform:scaleY(0); transform-origin:top;} 45%{transform:scaleY(1); transform-origin:top;} 55%{transform:scaleY(1); transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;}}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{background:var(--ink); overflow:hidden; padding:16px 0; position:relative; z-index:4;}
+  .marquee-track{display:flex; width:max-content; animation:marquee 26s linear infinite;}
+  .marquee-track span{
+    font-family:'Fraunces', serif; font-style:italic; font-size:1.15rem; color:#F1E1D8;
+    padding:0 34px; white-space:nowrap; display:flex; align-items:center; gap:34px;
+  }
+  .marquee-track span::after{content:"✦"; font-style:normal; color:var(--accent-soft); font-size:0.8rem;}
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---------- SECTION HEADS ---------- */
+  .section{padding:clamp(76px,11vw,140px) 0; position:relative;}
+  .section-alt{background:var(--bg-alt);}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:clamp(36px,5vw,60px); flex-wrap:wrap; position:relative; z-index:1;}
+  .section-head .kicker{color:var(--accent); font-size:0.85rem; letter-spacing:0.03em; margin-bottom:12px; display:flex; align-items:center; gap:9px;}
+  .section-head .kicker .dash{width:22px; height:1px; background:var(--accent); display:inline-block;}
+  .section-head h2{font-size:clamp(2.1rem,4.4vw,3.4rem);}
+  .section-head p{color:var(--ink-soft); max-width:38ch; font-size:0.98rem;}
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .85s var(--ease-soft), transform .85s var(--ease-soft);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- FILTER CHIPS ---------- */
+  .filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:34px; position:relative; z-index:1;}
+  .chip{
+    padding:10px 20px; border-radius:100px; border:1px solid var(--line); font-size:0.87rem; color:var(--ink-soft);
+    background:var(--panel); transition:background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .3s var(--ease);
+  }
+  .chip:hover{transform:translateY(-2px); border-color:var(--accent);}
+  .chip.active{background:var(--ink); color:var(--bg); border-color:var(--ink);}
+
+  /* ---------- CATALOG ---------- */
+  .catalog-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(14px,1.8vw,26px); position:relative; z-index:1;
+  }
+  @media(min-width:640px){ .catalog-grid{grid-template-columns:repeat(3,1fr);} }
+  @media(min-width:1040px){ .catalog-grid{grid-template-columns:repeat(4,1fr);} }
+
+  .card{
+    position:relative; cursor:pointer; border-radius:10px; overflow:hidden; background:var(--panel);
+    opacity:0; transform:translateY(26px) scale(.97); transition:opacity .7s var(--ease-soft), transform .7s var(--ease-soft), box-shadow .4s;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .card.in{opacity:1; transform:translateY(0) scale(1);}
+  .card:hover{box-shadow:var(--shadow);}
+  .card-frame{position:relative; aspect-ratio:4/5; overflow:hidden; transform-style:preserve-3d;}
+  .card-frame img{width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease-soft), filter .5s;}
+  .card:hover .card-frame img{transform:scale(1.08);}
+  .card-overlay{
+    position:absolute; inset:0; background:linear-gradient(180deg, rgba(46,30,34,0) 40%, rgba(46,30,34,0.82) 100%);
+    opacity:0; transition:opacity .4s var(--ease); display:flex; align-items:flex-end; padding:18px;
+  }
+  .card:hover .card-overlay{opacity:1;}
+  .card-info{color:#fff; width:100%;}
+  .card-info .name{font-family:'Fraunces', serif; font-size:1.08rem;}
+  .card-info .bottom-row{display:flex; align-items:center; justify-content:space-between; margin-top:6px;}
+  .card-info .price{font-size:0.85rem; opacity:0.9;}
+  .card-info .wa-hint{display:flex; align-items:center; gap:6px; font-size:0.72rem; opacity:0.85; background:rgba(255,255,255,0.14); padding:5px 10px; border-radius:100px;}
+  .card-info .wa-hint svg{width:12px; height:12px;}
+  .card-tag{
+    position:absolute; top:12px; left:12px; background:rgba(252,246,241,0.94); color:var(--ink);
+    font-size:0.68rem; letter-spacing:0.03em; padding:6px 12px; border-radius:100px; z-index:2;
+  }
+  .card-eye{
+    position:absolute; top:12px; right:12px; width:34px; height:34px; border-radius:50%; z-index:2;
+    background:rgba(252,246,241,0.94); display:flex; align-items:center; justify-content:center;
+    transform:scale(0.5) rotate(-20deg); opacity:0; transition:transform .4s var(--ease), opacity .35s;
+  }
+  .card:hover .card-eye{transform:scale(1) rotate(0); opacity:1;}
+  .card-eye svg{width:15px; height:15px;}
+  .card-eye:hover{background:var(--ink); color:#fff;}
+
+  .catalog-more{text-align:center; margin-top:50px; position:relative; z-index:1;}
+  .ghost-btn{border:1px solid var(--ink); padding:14px 30px; border-radius:100px; font-size:0.88rem; display:inline-block; transition:background .35s var(--ease), color .35s var(--ease), transform .35s var(--ease);}
+  .ghost-btn:hover{background:var(--ink); color:var(--bg); transform:translateY(-2px);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr; gap:56px; align-items:center; position:relative; z-index:1;}
+  @media(min-width:880px){ .about-grid{grid-template-columns:0.95fr 1fr;} }
+  .about-images{position:relative; display:grid; grid-template-columns:1.2fr 0.85fr; gap:16px; align-items:end;}
+  .about-images img{border-radius:10px; width:100%; object-fit:cover;}
+  .about-images .img-a{aspect-ratio:4/5;}
+  .about-images .img-b{aspect-ratio:1/1; transform:translateY(30px);}
+  .badge-rotate{position:absolute; top:-34px; right:-18px; width:118px; height:118px; z-index:3; animation:spin 16s linear infinite;}
+  @keyframes spin{ from{transform:rotate(0);} to{transform:rotate(360deg);} }
+  .about-copy .kicker{color:var(--accent); font-size:0.85rem; letter-spacing:0.03em; margin-bottom:14px; display:flex; align-items:center; gap:9px;}
+  .about-copy .kicker .dash{width:22px; height:1px; background:var(--accent); display:inline-block;}
+  .about-copy h2{font-size:clamp(2rem,4vw,2.8rem); margin-bottom:20px;}
+  .about-copy p{color:var(--ink-soft); max-width:52ch; margin-bottom:14px;}
+  .about-copy p:last-of-type{margin-bottom:0;}
+  .about-sign{margin-top:28px; font-family:'Fraunces', serif; font-style:italic; color:var(--ink-soft); font-size:1.05rem;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr; gap:0; border-radius:14px; overflow:hidden; box-shadow:var(--shadow); position:relative; z-index:1;}
+  @media(min-width:900px){ .contact-grid{grid-template-columns:1fr 1fr;} }
+  .contact-form{background:var(--panel); padding:clamp(30px,4vw,54px);}
+  .contact-form h3{font-size:1.6rem; margin-bottom:8px;}
+  .contact-form > p{color:var(--ink-soft); margin-bottom:28px; font-size:0.95rem;}
+  .field{position:relative; margin-bottom:22px;}
+  .field input, .field textarea{
+    width:100%; border:none; border-bottom:1px solid var(--line); background:transparent;
+    padding:10px 2px; font-family:'Manrope',sans-serif; font-size:0.98rem; color:var(--ink); transition:border-color .3s;
+  }
+  .field textarea{resize:vertical; min-height:88px;}
+  .field label{position:absolute; left:2px; top:10px; color:var(--ink-soft); font-size:0.98rem; pointer-events:none; transition:transform .25s var(--ease), font-size .25s var(--ease), color .25s;}
+  .field input:focus, .field textarea:focus{border-color:var(--accent); outline:none;}
+  .field input:focus ~ label, .field input:not(:placeholder-shown) ~ label,
+  .field textarea:focus ~ label, .field textarea:not(:placeholder-shown) ~ label{transform:translateY(-20px); font-size:0.75rem; color:var(--accent);}
+  .field-line{position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--accent); transition:width .35s var(--ease);}
+  .field input:focus ~ .field-line, .field textarea:focus ~ .field-line{width:100%;}
+  .submit-btn{background:var(--ink); color:var(--bg); padding:14px 30px; border-radius:100px; font-size:0.92rem; margin-top:6px; display:inline-flex; align-items:center; gap:10px; transition:background .35s, transform .35s;}
+  .submit-btn:hover{background:var(--accent); transform:translateY(-2px);}
+  .form-note{margin-top:16px; font-size:0.82rem; color:var(--ink-soft); opacity:0; transition:opacity .4s;}
+  .form-note.show{opacity:1;}
+
+  .contact-info{background:var(--ink); color:#F6E9E1; padding:clamp(30px,4vw,54px); display:flex; flex-direction:column;}
+  .contact-info h3{color:#F6E9E1; font-size:1.6rem; margin-bottom:22px;}
+  .info-row{display:flex; gap:16px; padding:16px 0; border-bottom:1px solid rgba(246,233,225,0.14);}
+  .info-row:first-of-type{padding-top:0;}
+  .info-row .ic{width:20px; height:20px; flex-shrink:0; margin-top:2px; opacity:0.85;}
+  .info-row .lbl{font-size:0.75rem; letter-spacing:0.03em; opacity:0.6; margin-bottom:3px;}
+  .info-row .val{font-size:0.98rem;}
+  .info-row a.val:hover{color:var(--accent-soft);}
+  .map-frame{margin-top:22px; border-radius:10px; overflow:hidden; flex-grow:1; min-height:200px; filter:grayscale(0.3) contrast(1.05) sepia(0.08);}
+  .map-frame iframe{width:100%; height:100%; min-height:200px; border:0; display:block;}
+  .social-row{display:flex; gap:14px; margin-top:22px;}
+  .social-row a{width:38px; height:38px; border-radius:50%; border:1px solid rgba(246,233,225,0.3); display:flex; align-items:center; justify-content:center; transition:background .3s, border-color .3s, transform .3s;}
+  .social-row a:hover{background:var(--accent); border-color:var(--accent); transform:translateY(-3px);}
+  .social-row svg{width:16px; height:16px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:34px 0; background:var(--bg-alt); position:relative; z-index:1;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+  footer p{font-size:0.82rem; color:var(--ink-soft);}
+  .to-top{display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--ink-soft); transition:color .3s, transform .3s;}
+  .to-top:hover{color:var(--ink); transform:translateY(-2px);}
+  .to-top svg{width:14px; height:14px;}
+
+  /* ---------- MODAL (quick view) ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(30,18,22,0.55); backdrop-filter:blur(7px);
+    z-index:900; opacity:0; pointer-events:none; transition:opacity .4s var(--ease);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-backdrop.open{opacity:1; pointer-events:auto;}
+  .modal-box{
+    background:var(--panel); width:min(960px, 100%); max-height:88vh; overflow:auto; border-radius:14px;
+    display:grid; grid-template-columns:1fr; box-shadow:0 40px 90px -20px rgba(0,0,0,0.5);
+    transform:translateY(26px) scale(0.97); opacity:0; transition:transform .5s var(--ease), opacity .4s var(--ease);
+    position:relative;
+  }
+  @media(min-width:720px){ .modal-box{grid-template-columns:1.1fr 1fr; max-height:82vh;} }
+  .modal-backdrop.open .modal-box{transform:translateY(0) scale(1); opacity:1;}
+  .modal-img{aspect-ratio:4/5; overflow:hidden;}
+  .modal-img img{width:100%; height:100%; object-fit:cover;}
+  .modal-body{padding:clamp(24px,3vw,44px); display:flex; flex-direction:column;}
+  .modal-tag{color:var(--accent); font-size:0.8rem; letter-spacing:0.03em; margin-bottom:10px;}
+  .modal-body h3{font-size:clamp(1.5rem,2.6vw,2.1rem); margin-bottom:8px;}
+  .modal-price{font-size:1.1rem; color:var(--ink-soft); margin-bottom:18px;}
+  .modal-desc{color:var(--ink-soft); font-size:0.96rem; margin-bottom:20px;}
+  .modal-meta{list-style:none; margin-bottom:26px;}
+  .modal-meta li{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); font-size:0.88rem;}
+  .modal-meta li span:first-child{color:var(--ink-soft);}
+  .modal-actions{margin-top:auto; display:flex; gap:12px; flex-wrap:wrap;}
+  .modal-actions .primary{
+    background:#25D366; color:#0B2E17; padding:13px 24px; border-radius:100px; font-size:0.9rem; font-weight:600;
+    display:inline-flex; align-items:center; gap:9px; transition:transform .3s, box-shadow .3s;
+  }
+  .modal-actions .primary:hover{transform:translateY(-2px); box-shadow:0 12px 26px -10px rgba(37,211,102,0.6);}
+  .modal-actions .primary svg{width:18px; height:18px;}
+  .modal-close{
+    position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%;
+    background:rgba(252,246,241,0.92); display:flex; align-items:center; justify-content:center; z-index:10;
+    transition:transform .3s, background .3s;
+  }
+  .modal-close:hover{transform:rotate(90deg); background:#fff;}
+  .modal-close svg{width:16px; height:16px;}
+  body.modal-lock{overflow:hidden;}
+
+  /* ---------- FLOATING WHATSAPP BUTTON ---------- */
+  .wa-float{
+    position:fixed; right:22px; bottom:22px; z-index:400; width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 30px -10px rgba(37,211,102,0.65);
+    transition:transform .35s var(--ease);
+  }
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:28px; height:28px;}
+  .wa-float::before{
+    content:""; position:absolute; inset:0; border-radius:50%; background:#25D366; opacity:0.55;
+    animation:pulseRing 2.4s ease-out infinite;
+  }
+  @keyframes pulseRing{ 0%{transform:scale(1); opacity:0.55;} 100%{transform:scale(1.9); opacity:0;} }
+
+  @media(max-width:860px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
+  @media(max-width:520px){
+    .about-images{grid-template-columns:1fr 0.8fr;}
+    .badge-rotate{width:92px; height:92px; top:-24px; right:-10px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav" id="siteNav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="logo.jpg" alt="SEYON logo">
+      SEYON
+    </a>
+    <nav class="nav-links">
+      <a href="#catalog">Collection</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#catalog">Collection</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-slides" id="heroSlides"></div>
+  <div class="hero-content">
+    <div class="wrap">
+      <div>
+        <p class="hero-eyebrow"><span class="dash"></span>Women's housecoats &amp; loungewear</p>
+        <h1 class="hero-title">
+          <span class="line"><span>Housecoats made</span></span>
+          <span class="line"><span>for slow mornings.</span></span>
+        </h1>
+        <p class="hero-sub">Soft, generously cut housecoats and robes, sewn in small batches from brushed cotton and washed linen — made to be lived in.</p>
+      </div>
+      <div class="hero-cta-col">
+        <a href="#catalog" class="hero-shop-btn">
+          Shop the collection
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <div class="hero-dots" id="heroDots"></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- ============ CATALOG ============ -->
+<section class="section" id="catalog">
+  <div class="blob" style="width:420px; height:420px; background:var(--accent-soft); opacity:0.25; top:-120px; left:-160px; animation:drift1 15s ease-in-out infinite;"></div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="kicker"><span class="dash"></span>The collection</p>
+        <h2>Fifty pieces, made for home.</h2>
+      </div>
+      <p>Housecoats, wrap robes, kaftans and loungewear from the current line. Tap a piece to enquire on WhatsApp, or use the eye icon for a closer look.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="catalog-grid" id="catalogGrid"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section section-alt" id="about">
+  <div class="blob" style="width:380px; height:380px; background:var(--accent); opacity:0.14; bottom:-100px; right:-120px; animation:drift2 13s ease-in-out infinite;"></div>
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-images reveal">
+        <svg class="badge-rotate" viewBox="0 0 120 120" aria-hidden="true">
+          <defs><path id="badgePath" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path></defs>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.5"></circle>
+          <text font-family="Manrope, sans-serif" font-size="8.6" letter-spacing="2.4" fill="var(--ink)">
+            <textPath href="#badgePath" startOffset="0%">HANDMADE IN STUDIO &#10022; SMALL BATCH &#10022; EST 2016 &#10022; </textPath>
+          </text>
+          <circle cx="60" cy="60" r="5" fill="var(--accent)"></circle>
+        </svg>
+        <img class="img-a" src="https://picsum.photos/seed/bloomrobe-studio-a/800/1000" alt="Folded housecoats on a studio shelf" loading="lazy">
+        <img class="img-b" src="https://picsum.photos/seed/bloomrobe-studio-b/560/560" alt="Close-up of robe fabric and stitching" loading="lazy">
+      </div>
+      <div class="about-copy reveal">
+        <p class="kicker"><span class="dash"></span>About the studio</p>
+        <h2>Softness, cut generously — made close to home.</h2>
+        <p>SEYON started in 2016 around one cutting table and a simple idea: a housecoat should feel like the best part of your morning, not an afterthought. We still work that way — small runs, natural fibres, and a pattern block we keep refining rather than replacing every season.</p>
+        <p>Every robe and housecoat above is cut and finished by our small team, worn-tested by the women who make it, and priced for the time that actually goes into it. No filler seasons, just pieces we'd reach for ourselves, morning after morning.</p>
+        <p class="about-sign">— The Seyon team</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="kicker"><span class="dash"></span>Get in touch</p>
+        <h2>Visit or write to us.</h2>
+      </div>
+      <p>Stop by the studio shop, or send a note about an order, sizing, or a custom piece.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <form class="contact-form" id="contactForm">
+        <h3>Send a message</h3>
+        <p>We reply within one working day.</p>
+
+        <div class="field">
+          <input type="text" id="fname" placeholder=" " required>
+          <label for="fname">Your name</label>
+          <span class="field-line"></span>
+        </div>
+        <div class="field">
+          <input type="email" id="femail" placeholder=" " required>
+          <label for="femail">Email address</label>
+          <span class="field-line"></span>
+        </div>
+        <div class="field">
+          <textarea id="fmessage" placeholder=" " required></textarea>
+          <label for="fmessage">Message</label>
+          <span class="field-line"></span>
+        </div>
+        <button type="submit" class="submit-btn">
+          Send message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="form-note" id="formNote">Thanks — your message has been noted. We'll be in touch shortly.</p>
+      </form>
+
+      <div class="contact-info">
+        <h3>Studio details</h3>
+        <div class="info-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><div class="lbl">Address</div><div class="val">14 Hartley Lane, Kandy 20000, Sri Lanka</div></div>
+        </div>
+        <div class="info-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          <div><div class="lbl">WhatsApp / Phone</div><a class="val" href="https://wa.me/94754733109" target="_blank" rel="noopener">+94 75 473 3109</a></div>
+        </div>
+        <div class="info-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+          <div><div class="lbl">Email</div><a class="val" href="mailto:hello@seyon.example">hello@seyon.example</a></div>
+        </div>
+        <div class="info-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div><div class="lbl">Studio hours</div><div class="val">Tue–Sat, 10:00–18:00</div></div>
+        </div>
+
+        <div class="map-frame">
+          <iframe src="https://www.google.com/maps?q=Kandy,Sri+Lanka&output=embed" title="Studio location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 20c1-3 2-6 2.5-8"/><path d="M10.5 12a3 3 0 1 1 5.5 1.7c-.6 1.3-1.7 2-3 2"/></svg></a>
+          <a href="https://wa.me/94754733109" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l1.6-4.8A8.5 8.5 0 1 1 8.2 19L3 21Z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> SEYON. All garments made in-studio.</p>
+    <a href="#top" class="to-top">Back to top
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </a>
+  </div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-box" id="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-img"><img id="modalImg" src="" alt=""></div>
+    <div class="modal-body">
+      <p class="modal-tag" id="modalTag"></p>
+      <h3 id="modalName"></h3>
+      <p class="modal-price" id="modalPrice"></p>
+      <p class="modal-desc" id="modalDesc"></p>
+      <ul class="modal-meta" id="modalMeta"></ul>
+      <div class="modal-actions">
+        <a href="#" class="primary" id="modalWhatsApp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2c-5.5 0-9.98 4.48-9.98 9.98 0 1.76.46 3.48 1.34 5L2 22l5.17-1.36a9.96 9.96 0 0 0 4.85 1.24h.01c5.5 0 9.98-4.48 9.98-9.98S17.52 2 12.02 2Zm5.85 14.27c-.24.68-1.4 1.32-1.93 1.36-.5.05-1.1.08-1.78-.11-.41-.12-.94-.3-1.62-.6-2.86-1.24-4.73-4.12-4.87-4.31-.14-.19-1.17-1.56-1.17-2.98 0-1.42.75-2.11 1.02-2.4.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.07.95 1.97 1.25 2.25 1.39.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.28.36-.23.6-.14.25.09 1.57.74 1.84.87.27.14.45.2.51.32.07.12.07.68-.17 1.36Z"/></svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FLOATING WHATSAPP BUTTON ============ -->
+<a class="wa-float" href="https://wa.me/94754733109?text=Hi%20Seyon%2C%20I%27d%20like%20to%20ask%20about%20your%20collection." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.02 2c-5.5 0-9.98 4.48-9.98 9.98 0 1.76.46 3.48 1.34 5L2 22l5.17-1.36a9.96 9.96 0 0 0 4.85 1.24h.01c5.5 0 9.98-4.48 9.98-9.98S17.52 2 12.02 2Zm5.85 14.27c-.24.68-1.4 1.32-1.93 1.36-.5.05-1.1.08-1.78-.11-.41-.12-.94-.3-1.62-.6-2.86-1.24-4.73-4.12-4.87-4.31-.14-.19-1.17-1.56-1.17-2.98 0-1.42.75-2.11 1.02-2.4.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.07.95 1.97 1.25 2.25 1.39.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.28.36-.23.6-.14.25.09 1.57.74 1.84.87.27.14.45.2.51.32.07.12.07.68-.17 1.36Z"/></svg>
+</a>
+
+<script>
+(function(){
+  "use strict";
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var WHATSAPP_NUMBER = '94754733109';
+
+  /* ---------------- NAV ---------------- */
+  var siteNav = document.getElementById('siteNav');
+  window.addEventListener('scroll', function(){
+    siteNav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  var burger = document.getElementById('burger');
+  var mobilePanel = document.getElementById('mobilePanel');
+  function closeMobile(){
+    burger.classList.remove('open'); burger.setAttribute('aria-expanded','false');
+    mobilePanel.classList.remove('open');
+  }
+  burger.addEventListener('click', function(){
+    var open = burger.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true':'false');
+    mobilePanel.classList.toggle('open', open);
+  });
+  mobilePanel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMobile); });
+
+  /* ---------------- MARQUEE ---------------- */
+  var marqueeItems = ['Housecoats','Wrap Robes','Kaftans','Loungewear','Made for slow mornings','Small-batch studio'];
+  var marqueeTrack = document.getElementById('marqueeTrack');
+  for(var m = 0; m < 2; m++){
+    marqueeItems.forEach(function(t){
+      var span = document.createElement('span');
+      span.textContent = t;
+      marqueeTrack.appendChild(span);
+    });
+  }
+
+  /* ---------------- HERO SLIDER ---------------- */
+  /* Three distinct slide images: cover 1.png, cover 2.png, cover 3.png */
+  var heroImages = [
+    'cover 1.png',
+    'cover 2.png',
+    'cover 3.png'
+  ];
+  var heroSlidesEl = document.getElementById('heroSlides');
+  var heroDotsEl = document.getElementById('heroDots');
+  var heroEl = document.querySelector('.hero');
+
+  heroImages.forEach(function(src, i){
+    var div = document.createElement('div');
+    div.className = 'hero-slide' + (i === 0 ? ' active' : '');
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Seyon look ' + (i+1);
+    div.appendChild(img);
+    heroSlidesEl.appendChild(div);
+
+    var dot = document.createElement('button');
+    dot.setAttribute('aria-label', 'Show slide ' + (i+1));
+    if(i === 0) dot.classList.add('active');
+    dot.addEventListener('click', function(){ goToSlide(i); });
+    heroDotsEl.appendChild(dot);
+  });
+
+  var slideEls = heroSlidesEl.querySelectorAll('.hero-slide');
+  var dotEls = heroDotsEl.querySelectorAll('button');
+  var currentSlide = 0, slideTimer;
+
+  function goToSlide(i){
+    slideEls[currentSlide].classList.remove('active');
+    dotEls[currentSlide].classList.remove('active');
+    currentSlide = i;
+    slideEls[currentSlide].classList.add('active');
+    dotEls[currentSlide].classList.add('active');
+    resetTimer();
+  }
+  function nextSlide(){ goToSlide((currentSlide + 1) % slideEls.length); }
+  function resetTimer(){ clearInterval(slideTimer); slideTimer = setInterval(nextSlide, 5500); }
+  resetTimer();
+  setTimeout(function(){ heroEl.classList.add('loaded'); }, 250);
+
+  var touchX = null;
+  heroEl.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; }, {passive:true});
+  heroEl.addEventListener('touchend', function(e){
+    if(touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx) > 40){ dx < 0 ? nextSlide() : goToSlide((currentSlide - 1 + slideEls.length) % slideEls.length); }
+    touchX = null;
+  }, {passive:true});
+
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){
+        var y = window.scrollY;
+        if(y < window.innerHeight){ heroSlidesEl.style.transform = 'translateY(' + (y * 0.18) + 'px)'; }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive:true});
+
+  /* ---------------- PRODUCT DATA (women's housecoats & loungewear) ---------------- */
+  var adjectives = ['Blush','Rosewater','Ivory','Dusty Rose','Sage','Champagne','Lilac','Blossom','Petal','Cream','Mauve','Apricot','Honey','Powder','Orchid','Ballet','Coral','Peony','Frost','Linen','Marled','Faded Pink','Soft','Heather','Chalk','Moss','Nude','Vintage','Warm Sand','Clay'];
+  var categories = [
+    {name:'Housecoat', group:'Housecoats', desc:'A button-through housecoat in brushed cotton, cut generously for layering over sleepwear on cool mornings.', meta:{Fabric:'Brushed cotton', Fit:'Relaxed', Care:'Machine wash cold'}},
+    {name:'Wrap Robe', group:'Robes', desc:'A self-tie wrap robe in soft modal, with deep patch pockets and a shawl collar that drapes softly.', meta:{Fabric:'Modal blend', Fit:'Wrap fit', Care:'Hand wash cold'}},
+    {name:'Kaftan', group:'Kaftans', desc:'A relaxed kaftan in lightweight viscose, cut wide through the body for easy movement around the house.', meta:{Fabric:'Viscose', Fit:'Oversized', Care:'Machine wash cold'}},
+    {name:'Kimono Robe', group:'Robes', desc:'A short kimono robe in washed satin, finished with a contrast trim and an obi-style tie.', meta:{Fabric:'Washed satin', Fit:'Short robe', Care:'Hand wash cold'}},
+    {name:'Duster Coat', group:'Housecoats', desc:'A floor-length duster in quilted cotton, designed to be thrown on over anything for instant warmth.', meta:{Fabric:'Quilted cotton', Fit:'Floor length', Care:'Machine wash cold'}},
+    {name:'Nightgown', group:'Nightwear', desc:'A button-front nightgown in soft-brushed flannel, with a relaxed fit through the shoulder and hem.', meta:{Fabric:'Brushed flannel', Fit:'Relaxed', Care:'Machine wash cold'}},
+    {name:'Lounge Set', group:'Loungewear', desc:'A matching top-and-trouser lounge set in French terry, brushed inside for all-day softness.', meta:{Fabric:'French terry', Fit:'Regular', Care:'Machine wash cold'}},
+    {name:'Velvet Robe', group:'Robes', desc:'A plush velvet robe with a shawl collar and self-tie belt, weighted for cooler evenings.', meta:{Fabric:'Velvet', Fit:'Long robe', Care:'Dry clean only'}}
+  ];
+
+  var products = [];
+  for(var i = 0; i < 50; i++){
+    var adj = adjectives[i % adjectives.length];
+    var cat = categories[(i + Math.floor(i/7)) % categories.length];
+    var name = adj + ' ' + cat.name;
+    var price = (32 + ((i * 17) % 22) * 5 + (i % 3) * 4);
+    products.push({
+      id: i,
+      name: name,
+      category: cat.name,
+      group: cat.group,
+      price: price,
+      desc: cat.desc,
+      meta: cat.meta,
+      img: 'https://picsum.photos/seed/bloomrobe-item-' + i + '/900/1125'
+    });
+  }
+
+  /* ---------------- FILTER CHIPS ---------------- */
+  var groups = ['All'];
+  products.forEach(function(p){ if(groups.indexOf(p.group) === -1) groups.push(p.group); });
+  var filtersEl = document.getElementById('filters');
+  var activeGroup = 'All';
+
+  groups.forEach(function(g){
+    var chip = document.createElement('button');
+    chip.className = 'chip' + (g === 'All' ? ' active' : '');
+    chip.textContent = g;
+    chip.addEventListener('click', function(){
+      if(activeGroup === g) return;
+      activeGroup = g;
+      filtersEl.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      renderGrid(g);
+    });
+    filtersEl.appendChild(chip);
+  });
+
+  /* ---------------- WHATSAPP LINK BUILDER ---------------- */
+  function waLink(p){
+    var msg = "Hi Seyon! I'm interested in the " + p.name +
+      " (No. " + String(p.id + 1).padStart(2,'0') + ", " + p.category + ") priced at $" + p.price +
+      ". Could you share more details and availability?";
+    return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+  }
+
+  /* ---------------- RENDER CATALOG ---------------- */
+  var grid = document.getElementById('catalogGrid');
+  var gridIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        gridIO.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+
+  function renderGrid(filterGroup){
+    grid.innerHTML = '';
+    var list = filterGroup === 'All' ? products : products.filter(function(p){ return p.group === filterGroup; });
+    var hoverCapable = window.matchMedia('(hover: hover)').matches;
+
+    list.forEach(function(p){
+      var card = document.createElement('article');
+      card.className = 'card';
+      card.tabIndex = 0;
+      card.setAttribute('role','button');
+      card.setAttribute('aria-label', 'View details for ' + p.name);
+
+      card.innerHTML =
+        '<div class="card-frame">' +
+          '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+          '<span class="card-tag">' + p.category + '</span>' +
+          '<button class="card-eye" aria-label="Quick view ' + p.name + '" data-eye="1">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>' +
+          '</button>' +
+          '<div class="card-overlay"><div class="card-info">' +
+            '<div class="name">' + p.name + '</div>' +
+            '<div class="bottom-row">' +
+              '<span class="price">$' + p.price + '</span>' +
+              '<span class="wa-hint"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2c-5.5 0-9.98 4.48-9.98 9.98 0 1.76.46 3.48 1.34 5L2 22l5.17-1.36a9.96 9.96 0 0 0 4.85 1.24h.01c5.5 0 9.98-4.48 9.98-9.98S17.52 2 12.02 2Z"/></svg>Enquire</span>' +
+            '</div>' +
+          '</div></div>' +
+        '</div>';
+
+      card.addEventListener('click', function(e){
+        if(e.target.closest('[data-eye]')) return;
+        openModal(p);
+      });
+      card.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openModal(p); }
+      });
+      card.querySelector('[data-eye]').addEventListener('click', function(e){
+        e.stopPropagation();
+        openModal(p);
+      });
+
+      grid.appendChild(card);
+      gridIO.observe(card);
+
+      if(hoverCapable){
+        var frame = card.querySelector('.card-frame');
+        frame.addEventListener('mousemove', function(e){
+          var r = frame.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          frame.style.transform = 'perspective(700px) rotateY(' + (px * 6) + 'deg) rotateX(' + (py * -6) + 'deg)';
+        });
+        frame.addEventListener('mouseleave', function(){ frame.style.transform = 'perspective(700px) rotateY(0) rotateX(0)'; });
+      }
+    });
+  }
+  renderGrid('All');
+
+  /* ---------------- SCROLL REVEAL (non-card sections) ---------------- */
+  var revealTargets = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  revealTargets.forEach(function(el){ io.observe(el); });
+
+  /* ---------------- MODAL ---------------- */
+  var modalBackdrop = document.getElementById('modalBackdrop');
+  var modalImg = document.getElementById('modalImg');
+  var modalTag = document.getElementById('modalTag');
+  var modalName = document.getElementById('modalName');
+  var modalPrice = document.getElementById('modalPrice');
+  var modalDesc = document.getElementById('modalDesc');
+  var modalMeta = document.getElementById('modalMeta');
+  var modalClose = document.getElementById('modalClose');
+  var modalWhatsApp = document.getElementById('modalWhatsApp');
+  var lastFocused = null;
+
+  function openModal(p){
+    lastFocused = document.activeElement;
+    modalImg.src = p.img.replace('900/1125','1100/1375');
+    modalImg.alt = p.name;
+    modalTag.textContent = p.category + ' — No. ' + String(p.id + 1).padStart(2,'0');
+    modalName.textContent = p.name;
+    modalPrice.textContent = '$' + p.price;
+    modalDesc.textContent = p.desc;
+    modalMeta.innerHTML = '';
+    Object.keys(p.meta).forEach(function(k){
+      var li = document.createElement('li');
+      li.innerHTML = '<span>' + k + '</span><span>' + p.meta[k] + '</span>';
+      modalMeta.appendChild(li);
+    });
+    modalWhatsApp.href = waLink(p);
+    modalBackdrop.classList.add('open');
+    document.body.classList.add('modal-lock');
+    modalClose.focus();
+  }
+  function closeModal(){
+    modalBackdrop.classList.remove('open');
+    document.body.classList.remove('modal-lock');
+    if(lastFocused) lastFocused.focus();
+  }
+  modalClose.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', function(e){ if(e.target === modalBackdrop) closeModal(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
+  });
+
+  /* ---------------- CONTACT FORM ---------------- */
+  var form = document.getElementById('contactForm');
+  var note = document.getElementById('formNote');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    note.classList.add('show');
+    form.reset();
+    setTimeout(function(){ note.classList.remove('show'); }, 5000);
+  });
+
+})();
+</script>
+</body>
+</html>
