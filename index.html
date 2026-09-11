@@ -151,60 +151,14 @@
   }
   .hero::before{
     content:""; position:absolute; inset:0; z-index:2;
-    background:linear-gradient(180deg, rgba(30,18,22,0.22) 0%, rgba(30,18,22,0.05) 40%, rgba(30,18,22,0.82) 100%);
+    background:linear-gradient(180deg, rgba(30,18,22,0.12) 0%, rgba(30,18,22,0.05) 40%, rgba(30,18,22,0.35) 100%);
     pointer-events:none;
   }
-  .hero-content{position:relative; z-index:3; width:100%; padding-bottom:clamp(40px,8vh,100px);}
-  .hero-content .wrap{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:32px;
-    flex-wrap:wrap;
+  .hero-dots-wrap{
+    position:absolute; z-index:3; left:50%; transform:translateX(-50%); bottom:30px;
+    display:flex; gap:9px;
   }
-  .hero-content .wrap > div:first-child{flex:1 1 320px; min-width:0; max-width:100%;}
-  .hero-eyebrow{
-    color:#FBF1E9; font-size:0.85rem; letter-spacing:0.04em; margin-bottom:16px; opacity:0;
-    display:inline-flex; align-items:center; gap:9px;
-    transform:translateY(10px); transition:opacity .8s var(--ease) .1s, transform .8s var(--ease) .1s;
-  }
-  .hero.loaded .hero-eyebrow{opacity:0.92; transform:translateY(0);}
-  .hero-eyebrow .dash{width:26px; height:1px; background:#FBF1E9; display:inline-block; flex-shrink:0;}
-  .hero-title{
-    color:#FCF6F1;
-    font-size:clamp(2.2rem, 7vw, 5rem);
-    max-width:13ch;
-    text-wrap:balance;
-  }
-  .hero-title .line{display:block; overflow:hidden;}
-  .hero-title .line span{display:block; transform:translateY(112%); transition:transform 1.05s var(--ease);}
-  .hero.loaded .hero-title .line span{transform:translateY(0);}
-  .hero-title .line:nth-child(1) span{transition-delay:.2s;}
-  .hero-title .line:nth-child(2) span{transition-delay:.36s; font-style:italic; font-weight:400;}
-  .hero-sub{
-    color:#F1E1D8; max-width:40ch; font-size:clamp(0.92rem, 1.6vw, 1.02rem);
-    margin-top:16px; opacity:0; transform:translateY(16px);
-    transition:opacity 1s var(--ease) .6s, transform 1s var(--ease) .6s;
-  }
-  .hero.loaded .hero-sub{opacity:1; transform:translateY(0);}
-  .hero-cta-col{
-    display:flex; flex-direction:column; align-items:flex-end; gap:20px;
-    opacity:0; transition:opacity 1s var(--ease) .75s;
-    flex-shrink:0;
-  }
-  .hero.loaded .hero-cta-col{opacity:1;}
-  .hero-shop-btn{
-    background:#FCF6F1; color:var(--ink); padding:15px 28px; border-radius:100px;
-    font-size:0.9rem; font-weight:600;
-    display:inline-flex; align-items:center; gap:10px; white-space:nowrap;
-    transition:transform .45s var(--ease), background .35s, color .35s, box-shadow .45s;
-    box-shadow:0 0 0 0 rgba(184,92,115,0);
-  }
-  .hero-shop-btn:hover{transform:translateY(-3px); background:var(--accent); color:#fff; box-shadow:0 14px 30px -10px rgba(184,92,115,0.6);}
-  .hero-shop-btn svg{transition:transform .4s var(--ease); flex-shrink:0;}
-  .hero-shop-btn:hover svg{transform:translateX(4px);}
-  .hero-dots{display:flex; gap:9px;}
-  .hero-dots button{width:26px; height:3px; background:rgba(255,255,255,0.4); border-radius:3px; transition:background .3s, width .3s; padding:0;}
+  .hero-dots button{width:26px; height:3px; background:rgba(255,255,255,0.45); border-radius:3px; transition:background .3s, width .3s; padding:0;}
   .hero-dots button.active{background:#FCF6F1; width:42px;}
 
   .scroll-cue{
@@ -435,26 +389,6 @@
   @media(max-width:768px){
     .hero{min-height:520px;}
     .hero-slide img{object-position:center 30%;}
-    .hero-content{padding-bottom:clamp(32px,6vh,60px);}
-    .hero-content .wrap{
-      flex-direction:column;
-      align-items:flex-start;
-      justify-content:flex-end;
-      gap:22px;
-    }
-    .hero-content .wrap > div:first-child{flex:1 1 auto; width:100%;}
-    .hero-title{font-size:clamp(1.9rem,8.5vw,2.6rem); max-width:100%;}
-    .hero-sub{font-size:0.92rem; max-width:100%; margin-top:14px;}
-    .hero-eyebrow{font-size:0.76rem; margin-bottom:14px;}
-    .hero-cta-col{
-      align-items:flex-start;
-      width:100%;
-      flex-direction:row;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:16px;
-    }
-    .hero-shop-btn{padding:13px 24px; font-size:0.86rem;}
     .scroll-cue{display:none;}
     .section-head{flex-direction:column; align-items:flex-start; gap:16px;}
     .section-head p{max-width:100%;}
@@ -467,9 +401,6 @@
     .wrap{padding:0 16px;}
     .hero{min-height:480px;}
     .hero-slide img{object-position:center 25%;}
-    .hero-title{font-size:clamp(1.7rem,8vw,2.2rem);}
-    .hero-sub{font-size:0.88rem;}
-    .hero-shop-btn{padding:12px 20px; font-size:0.84rem; gap:8px;}
     .brand{font-size:1.2rem; gap:8px;}
     .brand img{height:30px;}
     .about-images{grid-template-columns:1fr 0.85fr; gap:10px;}
@@ -492,8 +423,6 @@
   }
 
   @media(max-width:380px){
-    .hero-title{font-size:1.6rem;}
-    .hero-shop-btn{padding:11px 18px; font-size:0.8rem;}
     .catalog-grid{gap:8px;}
     .card-info .name{font-size:0.85rem;}
     .chip{padding:7px 12px; font-size:0.76rem;}
@@ -503,15 +432,11 @@
   @media(max-height:520px) and (orientation:landscape){
     .hero{min-height:100vh; height:100vh;}
     .hero-slide img{object-position:center 20%;}
-    .hero-content{padding-bottom:24px;}
-    .hero-title{font-size:1.6rem;}
-    .hero-sub{display:none;}
     .scroll-cue{display:none;}
-    .hero-eyebrow{margin-bottom:8px;}
   }
 
   /* Prevent zoom-related left alignment: ensure no fixed widths */
-  .wrap, .hero-content .wrap, .catalog-grid, .card, .about-grid, .contact-grid{
+  .wrap, .catalog-grid, .card, .about-grid, .contact-grid{
     max-width:100%;
     margin-left:auto;
     margin-right:auto;
@@ -527,7 +452,7 @@
 <header class="site-nav" id="siteNav">
   <div class="wrap">
     <a href="#top" class="brand">
-      <img src="logo.jpg" alt="SEYON logo">
+      <img src="1.jpeg" alt="SEYON logo">
       <span>SEYON</span>
     </a>
     <nav class="nav-links">
@@ -548,27 +473,11 @@
   <a href="#contact">Contact</a>
 </div>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO (images only) ============ -->
 <section class="hero" id="top">
   <div class="hero-slides" id="heroSlides"></div>
-  <div class="hero-content">
-    <div class="wrap">
-      <div>
-        <p class="hero-eyebrow"><span class="dash"></span>Women's housecoats &amp; loungewear</p>
-        <h1 class="hero-title">
-          <span class="line"><span>Housecoats made</span></span>
-          <span class="line"><span>for slow mornings.</span></span>
-        </h1>
-        <p class="hero-sub">Soft, generously cut housecoats and robes, sewn in small batches from brushed cotton and washed linen — made to be lived in.</p>
-      </div>
-      <div class="hero-cta-col">
-        <a href="#catalog" class="hero-shop-btn">
-          Shop the collection
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <div class="hero-dots" id="heroDots"></div>
-      </div>
-    </div>
+  <div class="hero-dots-wrap">
+    <div class="hero-dots" id="heroDots"></div>
   </div>
   <div class="scroll-cue">Scroll</div>
 </section>
@@ -607,8 +516,8 @@
           </text>
           <circle cx="60" cy="60" r="5" fill="var(--accent)"></circle>
         </svg>
-        <img class="img-a" src="https://picsum.photos/seed/bloomrobe-studio-a/800/1000" alt="Folded housecoats on a studio shelf" loading="lazy">
-        <img class="img-b" src="https://picsum.photos/seed/bloomrobe-studio-b/560/560" alt="Close-up of robe fabric and stitching" loading="lazy">
+        <img class="img-a" src="3.jpeg" alt="Folded housecoats on a studio shelf" loading="lazy">
+        <img class="img-b" src="4.jpeg" alt="Close-up of robe fabric and stitching" loading="lazy">
       </div>
       <div class="about-copy reveal">
         <p class="kicker"><span class="dash"></span>About the studio</p>
@@ -803,7 +712,6 @@
   function nextSlide(){ goToSlide((currentSlide + 1) % slideEls.length); }
   function resetTimer(){ clearInterval(slideTimer); slideTimer = setInterval(nextSlide, 5500); }
   resetTimer();
-  setTimeout(function(){ heroEl.classList.add('loaded'); }, 200);
 
   var touchX = null;
   heroEl.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; }, {passive:true});
@@ -853,7 +761,7 @@
       price: price,
       desc: cat.desc,
       meta: cat.meta,
-      img: 'https://picsum.photos/seed/bloomrobe-item-' + i + '/900/1125'
+      img: ['1.jpeg','2.jpeg','3.jpeg','4.jpeg'][i % 4]
     });
   }
 
@@ -976,7 +884,7 @@
 
   function openModal(p){
     lastFocused = document.activeElement;
-    modalImg.src = p.img.replace('900/1125','1100/1375');
+    modalImg.src = p.img;
     modalImg.alt = p.name;
     modalTag.textContent = p.category + ' — No. ' + String(p.id + 1).padStart(2,'0');
     modalName.textContent = p.name;
